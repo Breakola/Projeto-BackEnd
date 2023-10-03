@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f2f2f2;
+    }
+
+    .container-cadastro {
+      display: flex;
+      background-color: #ffffff;
+    }
+
+    .container {
+      flex-grow: 1;
+      background-color: #fff;
+      padding: 40px;
+      border: none;
+      border-radius: 0px;
+      box-shadow: 0;
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .input-flutuante {
+      position: relative;
+      margin-bottom: 2em;
+      margin-top: 1em; 
+    }
+
+    .input-flutuante input {
+      font-size: 1.25em;
+      padding: 0.5em;
+      border: none;
+      border-bottom: 2px solid;
+      background-color: transparent;
+      width: 100%;
+    }
+
+    .input-flutuante label {
+      position: absolute;
+      top: 0.5em;
+      left: 0.5em;
+      pointer-events: none;
+      transition: all 0.3s ease-in-out;
+      font-size: 1em;
+    }
+
+    .input-flutuante input:focus + label,
+    .input-flutuante input:not(:placeholder-shown) + label {
+      top: -1.5em;
+      font-size: 0.8em;
+      color: rgb(54, 54, 54);
+    }
+
+    .input-degrade {
+      border: none;
+      border-bottom: 2px solid;
+      background-image: linear-gradient(to right, rgb(127, 30, 207), rgb(41, 175, 236));
+    }
+
+    .button {
+      background-image: linear-gradient(to right, rgb(122, 5, 122), rgb(175, 47, 69));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      align-items: center;
+      margin: 0 auto;
+      font-size: 1.25em;
+      cursor: pointer;
+    }
+
+    .register a {
+      color: #740683;
+      pointer-events: all;
+    }
+
+    @media screen and (max-width: 600px) {
+      .container {
+        max-width: 100%;
+        padding: 15px;
+        font-size: 16px;
+      }
+
+      .input-flutuante input {
+        font-size: 1.1em;
+      }
+
+      input[type="submit"] {
+        font-size: 16px;
+        height: 45px;
+        padding: 0 20px 0 50px;
+      }
+
+      .register {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-cadastro">
+    <div class="container">
+      <h2>Cadastro</h2>
+      <form class="form">
+        <div class="input-flutuante">
+          <input type="text" id="nome" placeholder=" " required>
+          <label for="nome">Digite nome de Usuário</label>
+        </div>
+
+        <div class="input-flutuante">
+          <input type="text" id="email" placeholder=" " required>
+          <label for="email">Email</label>
+          <span class="error" id="emailError"></span>
+        </div>
+
+        <div class="input-flutuante">
+          <input type="password" id="senha" placeholder=" " required>
+          <label for="senha">Senha</label>
+          <span class="error" id="senhaError"></span>
+        </div>
+
+        <input type="submit" value="Cadastrar" class="button" <a href="home.html"></a> >
+        <div class="register">
+          Já tem uma conta? <a href="home.html">Entrar</a>
+        </div>
+      </form>
+    </div>
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.3yuJe5RK3PmNW9stzib9CwHaCd%26pid%3DApi&f=1&ipt=ff07f9d14f0b5550c90fbba0ac12f747443ec076c42016bb479b85614285ca22&ipo=images" alt="Imagem no cadastro">
+  </div>
+  <script>
+    const form = document.querySelector('.form');
+    const emailInput = document.querySelector('#email');
+    const senhaInput = document.querySelector('#senha');
+    const emailError = document.querySelector('#emailError');
+    const senhaError = document.querySelector('#senhaError');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const isValidEmail = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(emailInput.value.trim());
+      if (!isValidEmail) {
+        emailError.textContent = 'Email inválido';
+        emailError.style.display = 'block';
+      } else {
+        emailError.style.display = 'none';
+      }
+      const isValidSenha = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(senhaInput.value.trim());
+      if (!isValidSenha) {
+        senhaError.textContent = 'A senha deve conter pelo menos um número e uma letra maiúscula';
+        senhaError.style.display = 'block';
+      } else {
+        senhaError.style.display = 'none';
+      }
+      if (isValidEmail && isValidSenha) {
+        form.submit();
+      }
+    });
+  </script>
+</body>
+</html>
